@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Simple Recipes') }}</title>
+    <!-- <title>{{ config('app.name', 'Simple Recipes') }}</title> -->
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -35,13 +36,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link @if(Request::path() == '/') ? active : ''@endif" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Recipes</a>
+                            <a class="nav-link @if(Route::current()->getPrefix() == 'recipes') ? active : ''@endif" aria-current="page" href="{{ route('recipes.index') }}">Recipes</a>
                         </li>
                     </ul>
 
@@ -63,7 +64,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name  }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -137,5 +138,11 @@
     </footer>
 </body>
 @yield('script')
+@section('script')
+<script>
+    
+</script>
+@endsection
 </html>
+
 
