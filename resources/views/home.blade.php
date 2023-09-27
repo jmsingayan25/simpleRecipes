@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Simple Recipes')
 @section('content')
 
 <div class="container-fluid p-0 overflow-hidden">
